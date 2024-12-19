@@ -1,11 +1,17 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+// Routes pour les voitures (CRUD complet)
+Route::resource('cars', CarController::class);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
