@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,6 +12,9 @@ Route::get('/', function () {
 
 // Routes pour les voitures (CRUD complet)
 Route::resource('cars', CarController::class);
+
+// Routes pour les réservations (CRUD complet)
+Route::resource('reservations', ReservationController::class);
 
 
 Route::get('/dashboard', function () {

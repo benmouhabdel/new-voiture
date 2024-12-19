@@ -9,15 +9,15 @@
                 <h1 class="text-2xl font-bold">{{ $car->name }}</h1>
                 <div class="space-x-2">
                     <a href="{{ route('cars.edit', $car) }}"
-                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                       class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                         Modifier
                     </a>
                     <form action="{{ route('cars.destroy', $car) }}" method="POST" class="inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
-                            class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette voiture ?')">
+                                class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette voiture ?')">
                             Supprimer
                         </button>
                     </form>
@@ -32,8 +32,8 @@
                             @if($car->{"photo$i"})
                                 <div>
                                     <img src="{{ Storage::url($car->{"photo$i"}) }}"
-                                        alt="Photo {{ $i }}"
-                                        class="w-full h-32 object-cover rounded shadow">
+                                         alt="Photo {{ $i }}"
+                                         class="w-full h-32 object-cover rounded shadow">
                                 </div>
                             @endif
                         @endfor
@@ -68,8 +68,8 @@
                                         {{ $reservation->first_name }} {{ $reservation->last_name }}
                                         <br>
                                         <span class="text-sm text-gray-600">
-                                            Du {{ $reservation->reservation_date_start->format('d/m/Y') }}
-                                            au {{ $reservation->reservation_date_end->format('d/m/Y') }}
+                                            Du {{    (new \Carbon\Carbon($reservation->reservation_date_start))->format('Y-m-d')}}
+                                            au {{  (new \Carbon\Carbon( $reservation->reservation_date_end))->format('Y-m-d')}}
                                         </span>
                                     </li>
                                 @endforeach

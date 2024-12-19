@@ -23,7 +23,8 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        $cars = Car::available()->get();
+        $cars = Car::all();
+//        $cars = Car::available()->get();
         return view('reservations.create', compact('cars'));
     }
 
@@ -82,7 +83,8 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        $cars = Car::available()->get();
+        $cars = Car::all();
+//        $cars = Car::available()->get();
         return view('reservations.edit', compact('reservation', 'cars'));
     }
 
@@ -104,10 +106,10 @@ class ReservationController extends Controller
         ]);
 
         // Vérifier la disponibilité de la voiture pour les nouvelles dates
-        if ($request->car_id != $reservation->car_id || 
+        if ($request->car_id != $reservation->car_id ||
             $request->reservation_date_start != $reservation->reservation_date_start->format('Y-m-d') ||
             $request->reservation_date_end != $reservation->reservation_date_end->format('Y-m-d')) {
-            
+
             $isCarAvailable = !Reservation::where('car_id', $request->car_id)
                 ->where('id', '!=', $reservation->id)
                 ->where(function($query) use ($request) {

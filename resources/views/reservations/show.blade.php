@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.newapp')
 
 @section('title', 'Détails de la Réservation')
 
@@ -8,14 +8,14 @@
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-2xl font-bold">Détails de la Réservation</h1>
                 <div class="space-x-2">
-                    <a href="{{ route('reservations.edit', $reservation) }}" 
+                    <a href="{{ route('reservations.edit', $reservation) }}"
                         class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                         Modifier
                     </a>
                     <form action="{{ route('reservations.destroy', $reservation) }}" method="POST" class="inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" 
+                        <button type="submit"
                             class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                             onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')">
                             Supprimer
@@ -28,7 +28,7 @@
                 <!-- Informations personnelles -->
                 <div class="space-y-4">
                     <h2 class="text-xl font-semibold">Informations personnelles</h2>
-                    
+
                     <div class="border-t pt-4">
                         <p class="text-sm text-gray-600">Nom complet</p>
                         <p class="font-medium">{{ $reservation->first_name }} {{ $reservation->last_name }}</p>
@@ -53,7 +53,7 @@
                 <!-- Détails de la réservation -->
                 <div class="space-y-4">
                     <h2 class="text-xl font-semibold">Détails de la réservation</h2>
-                    
+
                     <div class="border-t pt-4">
                         <p class="text-sm text-gray-600">Voiture réservée</p>
                         <p class="font-medium">{{ $reservation->car->name ?? 'N/A' }} - {{ $reservation->car->model ?? '' }}</p>
@@ -62,23 +62,23 @@
                     <div>
                         <p class="text-sm text-gray-600">Période de réservation</p>
                         <p class="font-medium">
-                            Du {{ $reservation->reservation_date_start->format('d/m/Y') }}
-                            au {{ $reservation->reservation_date_end->format('d/m/Y') }}
+                            Du {{    (new \Carbon\Carbon($reservation->reservation_date_start))->format('Y-m-d')}}
+                            au {{  (new \Carbon\Carbon( $reservation->reservation_date_end))->format('Y-m-d')}}
                         </p>
                     </div>
 
                     <div>
                         <p class="text-sm text-gray-600">Durée</p>
                         <p class="font-medium">
-                            {{ $reservation->reservation_date_start->diffInDays($reservation->reservation_date_end) }} jours
+                            {{ (new \Carbon\Carbon($reservation->reservation_date_start))->diffInDays($reservation->reservation_date_end) }} jours
                         </p>
                     </div>
 
                     @if($reservation->national_id_photo)
                         <div>
                             <p class="text-sm text-gray-600">Carte d'identité</p>
-                            <img src="{{ Storage::url($reservation->national_id_photo) }}" 
-                                alt="Carte d'identité" 
+                            <img src="{{ Storage::url($reservation->national_id_photo) }}"
+                                alt="Carte d'identité"
                                 class="mt-2 max-w-xs rounded shadow">
                         </div>
                     @endif
@@ -87,7 +87,7 @@
 
             <div class="mt-6 pt-6 border-t">
                 <div class="flex justify-between items-center">
-                    <a href="{{ route('reservations.index') }}" 
+                    <a href="{{ route('reservations.index') }}"
                         class="text-gray-600 hover:text-gray-900">
                         ← Retour à la liste
                     </a>
