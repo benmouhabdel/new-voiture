@@ -69,6 +69,7 @@
                                         <br>
                                         <span class="text-sm text-gray-600">
                                             Du {{    (new \Carbon\Carbon($reservation->reservation_date_start))->format('Y-m-d')}}
+
                                             au {{  (new \Carbon\Carbon( $reservation->reservation_date_end))->format('Y-m-d')}}
                                         </span>
                                     </li>
