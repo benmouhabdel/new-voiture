@@ -55,11 +55,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="mt-3">
 
-            {{$cars->links()}}
-
-            </div>
         </div>
     </div>
 @endsection

@@ -61,7 +61,7 @@
 
                     <div>
                         <p class="text-sm text-gray-600">Réservations en cours</p>
-                       {{-- @if($car->reservations->count() > 0)
+                        @if($car->reservations->count() > 0)
                             <ul class="mt-2 space-y-2">
                                 @foreach($car->reservations as $reservation)
                                     <li class="bg-gray-50 p-2 rounded">
@@ -76,7 +76,7 @@
                             </ul>
                         @else
                             <p class="text-gray-500">Aucune réservation en cours</p>
-                        @endif--}}
+                        @endif
                     </div>
                 </div>
             </div>
