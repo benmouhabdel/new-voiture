@@ -28,15 +28,17 @@
                 <!-- Photos du véhicule -->
                 <div class="space-y-4">
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        @for ($i = 1; $i <= 8; $i++)
-                            @if($car->{"photo$i"})
-                                <div>
-                                    <img src="{{ Storage::url($car->{"photo$i"}) }}"
-                                         alt="Photo {{ $i }}"
-                                         class="w-full h-32 object-cover rounded shadow">
-                                </div>
-                            @endif
-                        @endfor
+                        @forelse($car->photos as $photo)
+                            <div>
+                                <img src="{{ Storage::url($photo->photo_path) }}"
+                                     alt="Photo véhicule"
+                                     class="w-full h-32 object-cover rounded shadow">
+                            </div>
+                        @empty
+                            <div class="col-span-3 text-center text-gray-500">
+                                Aucune photo disponible
+                            </div>
+                        @endforelse
                     </div>
                 </div>
 
@@ -68,9 +70,8 @@
                                         {{ $reservation->first_name }} {{ $reservation->last_name }}
                                         <br>
                                         <span class="text-sm text-gray-600">
-                                            Du {{    (new \Carbon\Carbon($reservation->reservation_date_start))->format('Y-m-d')}}
-
-                                            au {{  (new \Carbon\Carbon( $reservation->reservation_date_end))->format('Y-m-d')}}
+                                            Du {{ (new \Carbon\Carbon($reservation->reservation_date_start))->format('d/m/Y') }}
+                                            au {{ (new \Carbon\Carbon($reservation->reservation_date_end))->format('d/m/Y') }}
                                         </span>
                                     </li>
                                 @endforeach

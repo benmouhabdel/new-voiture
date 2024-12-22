@@ -47,27 +47,29 @@ $route = $isEdit ? route('cars.update', $car) : route('cars.store');
         </div>
 
         <div class="space-y-4">
-            @for ($i = 1; $i <= 1; $i++)
-                <div>
-                    <label for="photo{{ $i }}" class="block text-sm font-medium text-gray-700">
-                        Photo {{ $i }}
-                    </label>
-                    <input type="file" multiple name="photo{{ $i }}" id="photo{{ $i }}"
-                        class="mt-1 block w-full text-sm text-gray-500
-                        file:mr-4 file:py-2 file:px-4
-                        file:rounded-full file:border-0
-                        file:text-sm file:font-semibold
-                        file:bg-blue-50 file:text-blue-700
-                        hover:file:bg-blue-100">
-                    @if($isEdit && $car->{"photo$i"})
-                        <div class="mt-2">
-                            <img src="{{ Storage::url($car->{"photo$i"}) }}"
-                                alt="Photo {{ $i }}"
+            <div>
+                <label for="photos" class="block text-sm font-medium text-gray-700">
+                    Photos du véhicule
+                </label>
+                <input type="file" multiple name="photos[]" id="photos"
+                    class="mt-1 block w-full text-sm text-gray-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-blue-50 file:text-blue-700
+                    hover:file:bg-blue-100">
+            </div>
+            @if($isEdit && $car->photos->count() > 0)
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+                    @foreach($car->photos as $photo)
+                        <div class="relative">
+                            <img src="{{ Storage::url($photo->photo_path) }}"
+                                alt="Photo véhicule"
                                 class="h-20 w-20 object-cover rounded">
                         </div>
-                    @endif
+                    @endforeach
                 </div>
-            @endfor
+            @endif
         </div>
     </div>
 

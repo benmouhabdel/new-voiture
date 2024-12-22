@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,21 +9,12 @@ class Car extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'model',
-        'price_per_day',
-        'is_available',
-        'photo1',
-        'photo2',
-        'photo3',
-        'photo4',
-        'photo5',
-        'photo6',
-        'photo7',
-        'photo8',
-    ];
-    
+    protected $fillable = ['name', 'model', 'price_per_day', 'is_available'];
+
+    public function photos()
+    {
+        return $this->hasMany(CarPhoto::class);
+    }
 
     // Relier à la table des réservations
     public function reservations()
@@ -37,5 +29,4 @@ class Car extends Model
             ->where('reservation_date', $date)
             ->exists();
     }
-    
 }

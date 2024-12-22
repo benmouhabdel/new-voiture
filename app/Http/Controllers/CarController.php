@@ -4,36 +4,46 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
-    /**
-     * Display a listing of the cars.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $cars = Car::paginate(1);
+        $query = Car::with('photos');
+
+        // Search filter
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('model', 'like', "%{$search}%");
+            });
+        }
+
+        // Availability filter
+        if ($request->filled('availability')) {
+            $query->where('is_available', $request->availability === 'available');
+        }
+
+        // Price range filter
+        if ($request->filled('min_price')) {
+            $query->where('price_per_day', '>=', $request->min_price);
+        }
+        if ($request->filled('max_price')) {
+            $query->where('price_per_day', '<=', $request->max_price);
+        }
+
+        $cars = $query->paginate(10)->withQueryString();
+        
         return view('cars.index', compact('cars'));
     }
 
-    /**
-     * Show the form for creating a new car.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('cars.create');
     }
 
-    /**
-     * Store a newly created car in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -41,51 +51,42 @@ class CarController extends Controller
             'model' => 'required|string|max:255',
             'price_per_day' => 'required|integer|min:0',
             'is_available' => 'required|boolean',
-            'photo1' => 'nullable|image|max:2048',
-            'photo2' => 'nullable|image|max:2048',
-            'photo3' => 'nullable|image|max:2048',
-            'photo4' => 'nullable|image|max:2048',
-            'photo5' => 'nullable|image|max:2048',
-            'photo6' => 'nullable|image|max:2048',
-            'photo7' => 'nullable|image|max:2048',
-            'photo8' => 'nullable|image|max:2048',
+            'photos' => 'required|array',
+            'photos.*' => 'image|max:2048'
         ]);
 
-        $car = Car::create($validatedData);
+        $car = Car::create([
+            'name' => $validatedData['name'],
+            'model' => $validatedData['model'],
+            'price_per_day' => $validatedData['price_per_day'],
+            'is_available' => $validatedData['is_available'],
+        ]);
+
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('cars', 'public');
+                $car->photos()->create([
+                    'photo_path' => $path
+                ]);
+            }
+        }
 
         return redirect()->route('cars.index')
-                        ->with('success', 'Car created successfully.');
+                        ->with('success', 'Voiture créée avec succès.');
     }
 
-    /**
-     * Display the specified car.
-     *
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
-     */
     public function show(Car $car)
     {
+        $car->load('photos', 'reservations');
         return view('cars.show', compact('car'));
     }
 
-    /**
-     * Show the form for editing the specified car.
-     *
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Car $car)
     {
+        $car->load('photos');
         return view('cars.edit', compact('car'));
     }
 
-    /**
-     * Update the specified car in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Car $car)
     {
         $validatedData = $request->validate([
@@ -93,33 +94,39 @@ class CarController extends Controller
             'model' => 'required|string|max:255',
             'price_per_day' => 'required|integer|min:0',
             'is_available' => 'required|boolean',
-            'photo1' => 'nullable|image|max:2048',
-            'photo2' => 'nullable|image|max:2048',
-            'photo3' => 'nullable|image|max:2048',
-            'photo4' => 'nullable|image|max:2048',
-            'photo5' => 'nullable|image|max:2048',
-            'photo6' => 'nullable|image|max:2048',
-            'photo7' => 'nullable|image|max:2048',
-            'photo8' => 'nullable|image|max:2048',
+            'photos.*' => 'image|max:2048'
         ]);
 
-        $car->update($validatedData);
+        $car->update([
+            'name' => $validatedData['name'],
+            'model' => $validatedData['model'],
+            'price_per_day' => $validatedData['price_per_day'],
+            'is_available' => $validatedData['is_available'],
+        ]);
+
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('cars', 'public');
+                $car->photos()->create([
+                    'photo_path' => $path
+                ]);
+            }
+        }
 
         return redirect()->route('cars.index')
-                        ->with('success', 'Car updated successfully.');
+                        ->with('success', 'Voiture mise à jour avec succès.');
     }
 
-    /**
-     * Remove the specified car from storage.
-     *
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Car $car)
     {
+        // Supprimer les photos physiquement
+        foreach ($car->photos as $photo) {
+            Storage::disk('public')->delete($photo->photo_path);
+        }
+        
         $car->delete();
 
         return redirect()->route('cars.index')
-                        ->with('success', 'Car deleted successfully.');
+                        ->with('success', 'Voiture supprimée avec succès.');
     }
 }

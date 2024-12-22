@@ -16,15 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('model');
             $table->integer('price_per_day');
-            $table->boolean('is_available')->default(true);  // Indicateur de disponibilité
-            $table->string('photo1')->nullable();
-            $table->string('photo2')->nullable();
-            $table->string('photo3')->nullable();
-            $table->string('photo4')->nullable();
-            $table->string('photo5')->nullable();
-            $table->string('photo6')->nullable();
-            $table->string('photo7')->nullable();
-            $table->string('photo8')->nullable();
+            $table->boolean('is_available')->default(true);
+            $table->timestamps();
+        });
+
+        Schema::create('car_photos', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('car_id')->constrained()->onDelete('cascade');
+            $table->string('photo_path');
             $table->timestamps();
         });
     }
@@ -34,6 +33,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('car_photos');
         Schema::dropIfExists('cars');
     }
 };
