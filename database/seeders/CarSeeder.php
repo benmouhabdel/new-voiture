@@ -4,16 +4,17 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Car;
-use App\Models\CarPhoto;
+
 class CarSeeder extends Seeder
 {
+    /**
+     * Exécuter le seed de la base de données.
+     *
+     * @return void
+     */
     public function run()
     {
-        // Crée 10 voitures avec 8 photos associées pour chaque voiture
-        Car::factory(10)->create()->each(function ($car) {
-            $car->photos()->createMany(
-                CarPhoto::factory(8)->make()->toArray()
-            );
-        });
+        // Créer 50 voitures en utilisant la factory
+        Car::factory()->count(50)->create();
     }
 }

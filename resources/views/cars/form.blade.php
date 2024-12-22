@@ -19,10 +19,23 @@ $route = $isEdit ? route('cars.update', $car) : route('cars.store');
             </div>
 
             <div>
+                <label for="marque" class="block text-sm font-medium text-gray-700">Marque</label>
+                <input type="text" name="marque" id="marque"
+                    value="{{ old('marque', $isEdit ? $car->marque : '') }}"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            </div>
+
+            <div>
                 <label for="model" class="block text-sm font-medium text-gray-700">Modèle</label>
                 <input type="text" name="model" id="model"
                     value="{{ old('model', $isEdit ? $car->model : '') }}"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea name="description" id="description" rows="3"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">{{ old('description', $isEdit ? $car->description : '') }}</textarea>
             </div>
 
             <div>
@@ -31,22 +44,33 @@ $route = $isEdit ? route('cars.update', $car) : route('cars.store');
                     value="{{ old('price_per_day', $isEdit ? $car->price_per_day : '') }}"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
-
-            <div>
-                <label for="is_available" class="block text-sm font-medium text-gray-700">Disponibilité</label>
-                <select name="is_available" id="is_available"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                    <option value="1" {{ old('is_available', $isEdit ? $car->is_available : '') == 1 ? 'selected' : '' }}>
-                        Disponible
-                    </option>
-                    <option value="0" {{ old('is_available', $isEdit ? $car->is_available : '') == 0 ? 'selected' : '' }}>
-                        Non disponible
-                    </option>
-                </select>
-            </div>
         </div>
 
         <div class="space-y-4">
+            <div>
+                <label for="place" class="block text-sm font-medium text-gray-700">Nombre de places</label>
+                <input type="number" name="place" id="place"
+                    value="{{ old('place', $isEdit ? $car->place : '') }}"
+                    min="1"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center">
+                    <input type="checkbox" name="automatique" id="automatique" value="1"
+                        {{ old('automatique', $isEdit && $car->automatique ? 'checked' : '') }}
+                        class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    <label for="automatique" class="ml-2 block text-sm text-gray-700">Boîte automatique</label>
+                </div>
+
+                <div class="flex items-center">
+                    <input type="checkbox" name="diesel" id="diesel" value="1"
+                        {{ old('diesel', $isEdit && $car->diesel ? 'checked' : '') }}
+                        class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    <label for="diesel" class="ml-2 block text-sm text-gray-700">Moteur diesel</label>
+                </div>
+            </div>
+
             <div>
                 <label for="photos" class="block text-sm font-medium text-gray-700">
                     Photos du véhicule
@@ -59,6 +83,7 @@ $route = $isEdit ? route('cars.update', $car) : route('cars.store');
                     file:bg-blue-50 file:text-blue-700
                     hover:file:bg-blue-100">
             </div>
+            
             @if($isEdit && $car->photos->count() > 0)
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
                     @foreach($car->photos as $photo)

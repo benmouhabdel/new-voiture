@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('marque');
             $table->string('model');
+            $table->string('description');
             $table->integer('price_per_day');
-            $table->boolean('is_available')->default(true);
+            $table->boolean('automatique')->default(true);
+            $table->boolean('diesel')->default(true);
+            $table->integer('place');
             $table->timestamps();
         });
 

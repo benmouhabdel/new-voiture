@@ -22,10 +22,14 @@ class CarFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->company . ' Car',
-            'model' => $this->faker->word . '-' . $this->faker->randomNumber(3),
-            'price_per_day' => $this->faker->numberBetween(50, 500),
-            'is_available' => $this->faker->boolean(80), // 80% de chance d'être disponible
+            'name' => $this->faker->word . ' ' . $this->faker->word,
+            'marque' => $this->faker->randomElement(['Toyota', 'BMW', 'Mercedes', 'Audi', 'Renault', 'Peugeot', 'Volkswagen']),
+            'model' => $this->faker->word,
+            'description' => $this->faker->paragraph,
+            'price_per_day' => $this->faker->numberBetween(30, 200),
+            'automatique' => $this->faker->boolean,
+            'diesel' => $this->faker->boolean,
+            'place' => $this->faker->numberBetween(2, 7),
         ];
     }
 }
