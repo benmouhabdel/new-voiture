@@ -3,6 +3,7 @@
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
+use App\Models\Car;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,6 +11,9 @@ Route::get('/', function () {
 });
 Route::get('/b', function () {
     return view('browse');
+});
+Route::get('/s/{car}', function (Car $car) {
+    return view('show-car', compact('car'));
 });
 
 
