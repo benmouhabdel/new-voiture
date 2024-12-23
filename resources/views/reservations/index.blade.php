@@ -7,9 +7,7 @@
         <div class="p-6">
             <div class="flex justify-between items-center mb-4">
                 <h1 class="text-2xl font-bold">Liste des Réservations</h1>
-                <a href="{{ route('reservations.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                    Nouvelle Réservation
-                </a>
+            
             </div>
 
             <div class="overflow-x-auto">

@@ -27,58 +27,64 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Photos du véhicule -->
                 <div class="space-y-4">
+                    <h2 class="text-lg font-semibold">Photos</h2>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        @for ($i = 1; $i <= 8; $i++)
-                            @if($car->{"photo$i"})
-                                <div>
-                                    <img src="{{ Storage::url($car->{"photo$i"}) }}"
-                                         alt="Photo {{ $i }}"
-                                         class="w-full h-32 object-cover rounded shadow">
-                                </div>
-                            @endif
-                        @endfor
+                        @forelse($car->photos as $photo)
+                            <div>
+                                <img src="{{ Storage::url($photo->photo_path) }}"
+                                     alt="Photo véhicule"
+                                     class="w-full h-32 object-cover rounded shadow">
+                            </div>
+                        @empty
+                            <div class="col-span-3 text-center text-gray-500">
+                                Aucune photo disponible
+                            </div>
+                        @endforelse
                     </div>
                 </div>
 
                 <!-- Informations du véhicule -->
                 <div class="space-y-4">
-                    <div>
-                        <p class="text-sm text-gray-600">Modèle</p>
-                        <p class="font-medium">{{ $car->model }}</p>
+                    <h2 class="text-lg font-semibold">Caractéristiques</h2>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-sm text-gray-600">Marque</p>
+                            <p class="font-medium">{{ $car->marque }}</p>
+                        </div>
+
+                        <div>
+                            <p class="text-sm text-gray-600">Modèle</p>
+                            <p class="font-medium">{{ $car->model }}</p>
+                        </div>
+
+                        <div>
+                            <p class="text-sm text-gray-600">Prix par jour</p>
+                            <p class="font-medium text-blue-600">{{ $car->price_per_day }}€</p>
+                        </div>
+
+                        <div>
+                            <p class="text-sm text-gray-600">Nombre de places</p>
+                            <p class="font-medium">{{ $car->place }}</p>
+                        </div>
+
+                        <div>
+                            <p class="text-sm text-gray-600">Transmission</p>
+                            <p class="font-medium">{{ $car->automatique ? 'Automatique' : 'Manuelle' }}</p>
+                        </div>
+
+                        <div>
+                            <p class="text-sm text-gray-600">Carburant</p>
+                            <p class="font-medium">{{ $car->diesel ? 'Diesel' : 'Essence' }}</p>
+                        </div>
                     </div>
 
-                    <div>
-                        <p class="text-sm text-gray-600">Prix par jour</p>
-                        <p class="font-medium text-blue-600">{{ $car->price_per_day }}€</p>
-                    </div>
-
-                    <div>
-                        <p class="text-sm text-gray-600">Statut</p>
-                        <p class="inline-flex px-2 py-1 rounded text-sm {{ $car->is_available ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                            {{ $car->is_available ? 'Disponible' : 'Non disponible' }}
-                        </p>
-                    </div>
-
-                    <div>
-                        <p class="text-sm text-gray-600">Réservations en cours</p>
-                        @if($car->reservations->count() > 0)
-                            <ul class="mt-2 space-y-2">
-                                @foreach($car->reservations as $reservation)
-                                    <li class="bg-gray-50 p-2 rounded">
-                                        {{ $reservation->first_name }} {{ $reservation->last_name }}
-                                        <br>
-                                        <span class="text-sm text-gray-600">
-                                            Du {{    (new \Carbon\Carbon($reservation->reservation_date_start))->format('Y-m-d')}}
-
-                                            au {{  (new \Carbon\Carbon( $reservation->reservation_date_end))->format('Y-m-d')}}
-                                        </span>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @else
-                            <p class="text-gray-500">Aucune réservation en cours</p>
-                        @endif
-                    </div>
+                    @if($car->description)
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-600">Description</p>
+                            <p class="mt-1">{{ $car->description }}</p>
+                        </div>
+                    @endif
                 </div>
             </div>
 
