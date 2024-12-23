@@ -10,7 +10,6 @@
 <body class="font-sans antialiased">
 <x-header/>
 @yield("content")
-
 <x-whatsapp/>
 <x-footer/>
 </body>
