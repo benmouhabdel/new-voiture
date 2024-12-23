@@ -1,4 +1,4 @@
-<section class="bg-white antialiased">
+<section class="bg-white antialiased z-10">
     <div class="mx-auto max-w-screen-2xl">
         <div id="slide-carousel" class="relative w-full" data-carousel="slide">
             <!-- Carousel wrapper -->
