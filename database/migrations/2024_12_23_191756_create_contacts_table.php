@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nom');
             $table->string('prenom');
             $table->string('email');
-            $table->text('description');
+            $table->text('message');
             $table->timestamps();
             $table->index(['nom', 'prenom']);
         });

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('marque');
             $table->string('model');
-            $table->text('description');
+            $table->string('description');
             $table->integer('price_per_day');
             $table->boolean('automatique')->default(true);
             $table->boolean('diesel')->default(true);
