@@ -8,10 +8,13 @@
             </h1>
         </div>
     </div>
-    <div class="my-10">
-        <x-home-search/>
-    </div>
+
     <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+       <div class="my-10">
+
+   <x-home-search/>
+
+    </div>
         <!-- Heading -->
         <!--  <div class="mb-4 flex items-center justify-between md:mb-8">
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Latest Deals</h2>

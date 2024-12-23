@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/b', function () {
+    return view('browse');
+});
 
 
 // Routes pour les voitures (CRUD complet)
