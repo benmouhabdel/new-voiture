@@ -10,7 +10,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/b', function () {
-    return view('browse');
+    return view('browse', ["cars" => Car::all()]);
 });
 Route::get('/s/{car}', function (Car $car) {
     return view('show-car', compact('car'));
