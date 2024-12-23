@@ -152,7 +152,7 @@
     </main>
 
     <!-- Footer amélioré -->
-    <footer class="bg-white shadow-inner mt-auto">
+    <!-- <footer class="bg-white shadow-inner mt-auto">
         <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="text-center md:text-left">
@@ -192,6 +192,6 @@
                 </p>
             </div>
         </div>
-    </footer>
+    </footer>-->
 
-    <script>
+
