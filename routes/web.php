@@ -3,11 +3,12 @@
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 
 // Routes pour les voitures (CRUD complet)
@@ -15,6 +16,7 @@ Route::resource('cars', CarController::class);
 
 // Routes pour les réservations (CRUD complet)
 Route::resource('reservations', ReservationController::class);
+Route::resource('contacts', ContactController::class)->except(['edit', 'update']);
 
 
 Route::get('/dashboard', function () {
