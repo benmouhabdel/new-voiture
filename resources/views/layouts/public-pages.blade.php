@@ -11,6 +11,7 @@
 <x-header/>
 @yield("content")
 
+<x-whatsapp/>
 <x-footer/>
 </body>
 </html>
