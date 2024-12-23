@@ -1,10 +1,13 @@
 <section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
 
-  <div class="flex justify-center">
-      <div>
-          <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">We invest in the <span class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">world’s potential</span></h1>
-            </div>
-  </div>
+    <div class="flex justify-center">
+        <div>
+            <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+                We invest in the <span
+                    class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">world’s potential</span>
+            </h1>
+        </div>
+    </div>
     <div class="my-10">
         <x-home-search/>
     </div>
