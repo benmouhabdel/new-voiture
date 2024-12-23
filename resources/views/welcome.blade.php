@@ -6,4 +6,6 @@
     <div class="my-10">
         <x-home-logos/>
     </div>
+    <x-home-testamonials/>
+
 @endsection
