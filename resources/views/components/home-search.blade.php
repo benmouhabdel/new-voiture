@@ -1,5 +1,5 @@
 
-    <div class="w-full max-w-screen-xl px-4 mx-auto lg:px-12">
+    <div class="w-full max-w-screen-xl mx-auto ">
         <!-- Start coding here -->
         <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
             <div class="px-4 divide-y dark:divide-gray-700">
