@@ -46,9 +46,7 @@
                                     <a href="{{ route('cars.index') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-md transition-colors duration-150">
                                         Liste des voitures
                                     </a>
-                                    <a href="{{ route('cars.create') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-md transition-colors duration-150">
-                                        Ajouter une voiture
-                                    </a>
+                        
                                 </div>
                             </div>
                         </div>
@@ -75,6 +73,26 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Nouveau Dropdown Contacts -->
+                    <div class="relative group">
+                        <button class="flex items-center text-gray-600 hover:text-blue-600 group-hover:text-blue-600 px-3 py-2 transition-colors duration-200">
+                            <span>Contacts</span>
+                            <svg class="ml-2 h-4 w-4 transition-transform duration-200 group-hover:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-1">
+                            <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                                <div class="relative bg-white p-2">
+                                    <a href="{{ route('contacts.index') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-md transition-colors duration-150">
+                                        Liste des contacts
+                                    </a>
+        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Mobile menu button -->
@@ -97,14 +115,18 @@
                 <a href="{{ route('cars.index') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition duration-150 ease-in-out">
                     Liste des voitures
                 </a>
-                <a href="{{ route('cars.create') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition duration-150 ease-in-out">
-                    Ajouter une voiture
-                </a>
                 <a href="{{ route('reservations.index') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition duration-150 ease-in-out">
                     Liste des réservations
                 </a>
                 <a href="{{ route('reservations.create') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition duration-150 ease-in-out">
                     Nouvelle réservation
+                </a>
+                <!-- Nouveaux liens pour Contacts dans le menu mobile -->
+                <a href="{{ route('contacts.index') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition duration-150 ease-in-out">
+                    Liste des contacts
+                </a>
+                <a href="{{ route('contacts.create') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition duration-150 ease-in-out">
+                    Ajouter un contact
                 </a>
             </div>
         </div>
