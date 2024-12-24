@@ -31,7 +31,7 @@
                             <div class="flex items-center">
                                 <a href="#" class="me-3 inline-flex rounded-lg bg-primary-700 px-5 py-3 text-base font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300">Discover more</a>
                                 <a href="#" class="inline-flex items-center rounded-lg bg-white bg-opacity-40 px-5 py-3 text-base font-medium text-white hover:bg-opacity-50 focus:outline-none focus:ring-4 focus:ring-gray-300"
-                                ><svg class="me-1 h-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                ><svg class="me-1 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                         <path fill-rule="evenodd" d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z" clip-rule="evenodd" />
                                     </svg>
                                     View catalog</a
