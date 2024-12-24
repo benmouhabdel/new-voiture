@@ -10,6 +10,7 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
+ 
 {
     Schema::create('cars', function (Blueprint $table) {
         $table->id();
@@ -22,7 +23,7 @@ return new class extends Migration
         $table->enum('diesel', ['0', '1'])->default('0');
         $table->integer('place');
         $table->timestamps();
-    });
+    }); 
 
     Schema::create('car_photos', function (Blueprint $table) {
         $table->id();

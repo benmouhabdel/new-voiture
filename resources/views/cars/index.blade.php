@@ -5,13 +5,18 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="bg-white rounded-lg shadow">
         <div class="p-6">
+ 
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-2xl font-bold text-gray-900">Véhicules disponibles</h1>
                 <a href="{{ route('cars.create') }}" 
                    class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
                     Ajouter un véhicule
                 </a>
-            </div>
+ 
+  <!--<div class="flex justify-between items-center mb-4">
+                <h1 class="text-2xl font-bold">Liste des Voitures</h1>
+                <a href="{{route('cars.create')}}" class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter Voiture</a>
+          --> </div>
 
             <div class="bg-gray-50 p-4 rounded-lg mb-6">
                 <form method="GET" action="{{ route('cars.index') }}" class="space-y-4">

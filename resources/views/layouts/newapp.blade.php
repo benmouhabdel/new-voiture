@@ -46,9 +46,7 @@
                                     <a href="{{ route('cars.index') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-md transition-colors duration-150">
                                         Liste des voitures
                                     </a>
-                                    <a href="{{ route('cars.create') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-md transition-colors duration-150">
-                                        Ajouter une voiture
-                                    </a>
+                        
                                 </div>
                             </div>
                         </div>
@@ -90,9 +88,11 @@
                                     <a href="{{ route('contacts.index') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-md transition-colors duration-150">
                                         Liste des contacts
                                     </a>
+ 
                                     <a href="{{ route('contacts.create') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-md transition-colors duration-150">
                                         Ajouter un contact
                                     </a>
+ 
                                 </div>
                             </div>
                         </div>
@@ -118,9 +118,6 @@
                 </a>
                 <a href="{{ route('cars.index') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition duration-150 ease-in-out">
                     Liste des voitures
-                </a>
-                <a href="{{ route('cars.create') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition duration-150 ease-in-out">
-                    Ajouter une voiture
                 </a>
                 <a href="{{ route('reservations.index') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition duration-150 ease-in-out">
                     Liste des réservations

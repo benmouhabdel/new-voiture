@@ -1,55 +1,75 @@
+ 
+<!-- create.blade.php -->
 @extends('layouts.newapp')
 
+@section('title', 'Créer un Contact')
+
 @section('content')
-<div class="container py-5">
-    <h1 class="text-center mb-8 text-2xl font-bold text-gray-800">Créer un Contact</h1>
-    <div class="max-w-2xl mx-auto">
-        <form method="POST" action="{{ route('contacts.store') }}" class="space-y-6 bg-white p-8 shadow-md rounded-lg">
+<div class="bg-white shadow-md rounded-lg">
+    <div class="p-6">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6">Créer un Contact</h1>
+        
+        <form method="POST" action="{{ route('contacts.store') }}" class="space-y-6">
             @csrf
+            
+            <!-- Nom -->
             <div>
-                <label for="nom" class="block text-sm font-medium text-gray-700">Nom</label>
+                <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
                 <input type="text" name="nom" id="nom" 
-                    value="{{ old('nom') }}" 
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" 
-                    required>
-                @error('nom') <p class="text-sm text-red-600">{{ $message }}</p> @enderror
+                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('nom') border-red-300 @enderror"
+                    value="{{ old('nom') }}" required>
+                @error('nom')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
             </div>
 
+            <!-- Prénom -->
             <div>
-                <label for="prenom" class="block text-sm font-medium text-gray-700">Prénom</label>
-                <input type="text" name="prenom" id="prenom" 
-                    value="{{ old('prenom') }}" 
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" 
-                    required>
-                @error('prenom') <p class="text-sm text-red-600">{{ $message }}</p> @enderror
+                <label for="prenom" class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
+                <input type="text" name="prenom" id="prenom"
+                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('prenom') border-red-300 @enderror"
+                    value="{{ old('prenom') }}" required>
+                @error('prenom')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
             </div>
 
+            <!-- Email -->
             <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" name="email" id="email" 
-                    value="{{ old('email') }}" 
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" 
-                    required>
-                @error('email') <p class="text-sm text-red-600">{{ $message }}</p> @enderror
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input type="email" name="email" id="email"
+                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('email') border-red-300 @enderror"
+                    value="{{ old('email') }}" required>
+                @error('email')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
             </div>
 
+            <!-- Message -->
             <div>
-                <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-                <textarea name="message" id="message" rows="5" 
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" 
+                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                <textarea name="message" id="message" rows="5"
+                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('message') border-red-300 @enderror"
                     required>{{ old('message') }}</textarea>
-                @error('message') <p class="text-sm text-red-600">{{ $message }}</p> @enderror
+                @error('message')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
             </div>
 
-            <div class="flex items-center justify-between">
-                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    Enregistrer
-                </button>
-                <a href="{{ route('contacts.index') }}" class="text-gray-500 hover:text-gray-700 underline">
+            <!-- Buttons -->
+            <div class="flex justify-end space-x-3">
+                <a href="{{ route('contacts.index') }}" 
+                    class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors duration-200">
                     Annuler
                 </a>
+                <button type="submit" 
+                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200">
+                    Enregistrer
+                </button>
+ 
             </div>
         </form>
     </div>
-</div>
+</div> 
 @endsection
+ 
