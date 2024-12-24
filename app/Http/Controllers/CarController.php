@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class CarController extends Controller
 {
@@ -74,10 +75,14 @@ class CarController extends Controller
             'description' => 'nullable|string',
             'price_per_day' => 'required|integer|min:0',
             'automatique' => 'required|boolean',
-            'diesel' => 'required|boolean',
+            'diesel' => ['required',
+            Rule::in(['a', 'b','c'])
+        ],
             'place' => 'required|integer|min:1',
             'photos' => 'required|array',
             'photos.*' => 'image|max:2048'
+        ], [
+             'diesel'=>"msg custom"
         ]);
 
         $car = Car::create([
