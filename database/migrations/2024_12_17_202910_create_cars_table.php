@@ -10,27 +10,28 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('cars', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('marque');
-            $table->string('model');
-            $table->text('description');
-            $table->integer('price_per_day');
-            $table->boolean('automatique')->default(true);
-            $table->boolean('diesel')->default(true);
-            $table->integer('place');
-            $table->timestamps();
-        });
+ 
+{
+    Schema::create('cars', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('marque');
+        $table->string('model');
+        $table->string('description');
+        $table->integer('price_per_day');  
+        $table->enum('automatique', ['0', '1'])->default('0');
+        $table->enum('diesel', ['0', '1'])->default('0');
+        $table->integer('place');
+        $table->timestamps();
+    }); 
 
-        Schema::create('car_photos', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('car_id')->constrained()->onDelete('cascade');
-            $table->string('photo_path');
-            $table->timestamps();
-        });
-    }
+    Schema::create('car_photos', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('car_id')->constrained()->onDelete('cascade');
+        $table->string('photo_path');
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.

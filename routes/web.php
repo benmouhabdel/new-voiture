@@ -3,7 +3,9 @@
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
+ 
 use App\Http\Controllers\ContactController; 
+ 
 use App\Models\Car;
 use App\Models\CarPhoto;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +31,7 @@ Route::middleware('auth')->group(function () {
 Route::resource('contacts', ContactController::class)->except(['edit', 'update']);
  
 
+Route::resource('contacts', ContactController::class)->except(['edit', 'update']);
 
     Route::get('/dashboard', function () {
         return view('dashboard');

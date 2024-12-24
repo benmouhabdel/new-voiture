@@ -32,8 +32,6 @@ class Car extends Model
      * @var array
      */
     protected $casts = [
-        'automatique' => 'boolean',
-        'diesel' => 'boolean',
         'price_per_day' => 'integer',
         'place' => 'integer',
     ];
@@ -56,5 +54,20 @@ class Car extends Model
     public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class);
+    }
+
+    /**
+     * Obtenir la transmission de la voiture (automatique ou manuelle).
+     *
+     * @return string
+     */
+    public function getAutomatiqueAttribute(): string
+    {
+        return $this->attributes['automatique'] === '1' ? 'Automatique' : 'Manuelle';
+    }
+    
+    public function getDieselAttribute(): string
+    {
+        return $this->attributes['diesel'] === '1' ? 'Diesel' : 'Essence';
     }
 }

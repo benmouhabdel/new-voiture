@@ -1,10 +1,11 @@
 <?php
-
+// CarController.php
 namespace App\Http\Controllers;
 
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class CarController extends Controller
 {
@@ -12,7 +13,6 @@ class CarController extends Controller
     {
         $query = Car::with('photos');
 
-        // Search filter
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -22,7 +22,6 @@ class CarController extends Controller
             });
         }
 
-        // Price range filter
         if ($request->filled('min_price')) {
             $query->where('price_per_day', '>=', $request->min_price);
         }
@@ -30,32 +29,27 @@ class CarController extends Controller
             $query->where('price_per_day', '<=', $request->max_price);
         }
 
-        // Model filter
         if ($request->filled('model')) {
             $query->where('model', $request->model);
         }
 
-        // Marque filter
         if ($request->filled('marque')) {
             $query->where('marque', $request->marque);
         }
 
-        // Automatique filter
         if ($request->filled('automatique')) {
-            $query->where('automatique', $request->automatique == 'true');
+            $query->where('automatique', $request->automatique);
         }
 
-        // Diesel filter
         if ($request->filled('diesel')) {
-            $query->where('diesel', $request->diesel == 'true');
+            $query->where('diesel', $request->diesel);
         }
 
-        // Place filter
         if ($request->filled('place')) {
             $query->where('place', $request->place);
         }
 
-        $cars = $query->paginate(10)->withQueryString();
+        $cars = $query->latest()->paginate(10)->withQueryString();
 
         return view('cars.index', compact('cars'));
     }
@@ -73,29 +67,20 @@ class CarController extends Controller
             'model' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price_per_day' => 'required|integer|min:0',
-            'automatique' => 'required|boolean',
-            'diesel' => 'required|boolean',
+            'automatique' => ['required', Rule::in(['0', '1'])],
+            'diesel' => ['required', Rule::in(['0', '1'])],
             'place' => 'required|integer|min:1',
             'photos' => 'required|array',
-            'photos.*' => 'image|max:2048'
+            'photos.*' => 'image|max:2048',
         ]);
 
-        $car = Car::create([
-            'name' => $validatedData['name'],
-            'marque' => $validatedData['marque'],
-            'model' => $validatedData['model'],
-            'description' => $validatedData['description'] ?? null,
-            'price_per_day' => $validatedData['price_per_day'],
-            'automatique' => $validatedData['automatique'],
-            'diesel' => $validatedData['diesel'],
-            'place' => $validatedData['place'],
-        ]);
+        $car = Car::create($validatedData);
 
         if ($request->hasFile('photos')) {
             foreach ($request->file('photos') as $photo) {
                 $path = $photo->store('cars', 'public');
                 $car->photos()->create([
-                    'photo_path' => $path
+                    'photo_path' => $path,
                 ]);
             }
         }
@@ -124,28 +109,32 @@ class CarController extends Controller
             'model' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price_per_day' => 'required|integer|min:0',
-            'automatique' => 'required|boolean',
-            'diesel' => 'required|boolean',
+            'automatique' => ['required', Rule::in(['0', '1'])],
+            'diesel' => ['required', Rule::in(['0', '1'])],
             'place' => 'required|integer|min:1',
-            'photos.*' => 'image|max:2048'
+            'photos' => 'nullable|array',
+            'photos.*' => 'image|max:2048',
+            'delete_photos' => 'nullable|array',
+            'delete_photos.*' => 'exists:car_photos,id'
         ]);
 
-        $car->update([
-            'name' => $validatedData['name'],
-            'marque' => $validatedData['marque'],
-            'model' => $validatedData['model'],
-            'description' => $validatedData['description'] ?? null,
-            'price_per_day' => $validatedData['price_per_day'],
-            'automatique' => $validatedData['automatique'],
-            'diesel' => $validatedData['diesel'],
-            'place' => $validatedData['place'],
-        ]);
+        $car->update($validatedData);
+
+        if ($request->has('delete_photos')) {
+            foreach ($request->delete_photos as $photoId) {
+                $photo = $car->photos()->find($photoId);
+                if ($photo) {
+                    Storage::disk('public')->delete($photo->photo_path);
+                    $photo->delete();
+                }
+            }
+        }
 
         if ($request->hasFile('photos')) {
             foreach ($request->file('photos') as $photo) {
                 $path = $photo->store('cars', 'public');
                 $car->photos()->create([
-                    'photo_path' => $path
+                    'photo_path' => $path,
                 ]);
             }
         }
@@ -156,7 +145,6 @@ class CarController extends Controller
 
     public function destroy(Car $car)
     {
-        // Supprimer les photos physiquement
         foreach ($car->photos as $photo) {
             Storage::disk('public')->delete($photo->photo_path);
         }
