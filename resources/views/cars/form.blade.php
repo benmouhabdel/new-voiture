@@ -52,7 +52,7 @@ $route = $isEdit ? route('cars.update', $car) : route('cars.store');
 
             <div class="space-y-4">
                 <div>
-                    <label for="price_per_day" class="block text-sm font-medium text-gray-700">Prix par jour (€)</label>
+                    <label for="price_per_day" class="block text-sm font-medium text-gray-700">Prix par jour (DH)</label>
                     <input type="number" name="price_per_day" id="price_per_day" 
                            value="{{ old('price_per_day', $isEdit ? $car->price_per_day : '') }}"
                            class="mt-1 w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
