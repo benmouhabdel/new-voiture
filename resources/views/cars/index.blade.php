@@ -30,10 +30,10 @@
                         <div class="space-y-1">
                             <label class="text-sm font-medium text-gray-700">Prix par jour</label>
                             <div class="flex gap-2">
-                                <input type="number" name="min_price" placeholder="Min €"
+                                <input type="number" name="min_price" placeholder="Min dirham"
                                        value="{{ request('min_price') }}"
                                        class="w-1/2 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
-                                <input type="number" name="max_price" placeholder="Max €"
+                                <input type="number" name="max_price" placeholder="Max dirham"
                                        value="{{ request('max_price') }}"
                                        class="w-1/2 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
                             </div>
@@ -87,7 +87,7 @@
                         <div class="p-4">
                             <h3 class="text-lg font-semibold text-gray-900">{{ $car->name }}</h3>
                             <p class="text-gray-600">{{ $car->marque }} {{ $car->model }}</p>
-                            <p class="text-lg font-bold text-indigo-600 mt-2">{{ $car->price_per_day }}€ /jour</p>
+                            <p class="text-lg font-bold text-indigo-600 mt-2">{{ $car->price_per_day }} DH /jour</p>
 
                             <div class="mt-2 flex flex-wrap gap-2">
                                 <span class="px-2 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">

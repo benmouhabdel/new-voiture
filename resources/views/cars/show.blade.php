@@ -56,7 +56,7 @@
                             </div>
                             <div>
                                 <dt class="text-sm text-gray-500">Prix par jour</dt>
-                                <dd class="text-indigo-600 font-bold">{{ $car->price_per_day }}€</dd>
+                                <dd class="text-indigo-600 font-bold">{{ $car->price_per_day }} DH</dd>
                             </div>
                             <div>
                                 <dt class="text-sm text-gray-500">Places</dt>
