@@ -4,13 +4,14 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Models\Car;
+use App\Models\CarPhoto;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/b', function () {
-    return view('browse', ["cars" => Car::all()]);
+    return view('browse', ["cars" => Car::with("photos")->get()]);
 });
 Route::get('/s/{car}', function (Car $car) {
     return view('show-car', compact('car'));

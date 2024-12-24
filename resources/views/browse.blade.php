@@ -122,9 +122,9 @@
                         class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                         <div class="h-56 w-full">
                             <a href="#">
-                                <img class="mx-auto h-full dark:hidden"
-                                     src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg" alt=""/>
-                                <img class="mx-auto hidden h-full dark:block"
+                                <img class="mx-auto object-none h-full dark:hidden"
+                                     src="{{ Storage::url($car->photos->first()->photo_path) }}" alt=""/>
+                                <img class="mx-auto object-cover hidden h-full dark:block"
                                      src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
                                      alt=""/>
                             </a>
@@ -192,6 +192,12 @@
                                 <li class="flex items-center gap-2">
                                     <span
                                         class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Default</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                    </svg>
+                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{$car->place}} places</p>
                                 </li>
                             </ul>
 
