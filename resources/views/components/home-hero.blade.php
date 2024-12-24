@@ -10,7 +10,7 @@
                             <a href="#" class="mb-5 inline-flex items-center justify-between rounded-full bg-white bg-opacity-10 px-1 py-1 pr-4 text-sm text-white hover:bg-opacity-20" role="alert">
                                 <span class="mr-3 rounded-xl bg-white bg-opacity-30 px-4 py-1 text-xs font-medium">Sale</span>
                                 <span class="mr-1 text-sm font-medium">Up to 30% OFF if you order today</span>
-                                <svg class="h-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <svg class="h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
                                 </svg>
                             </a>
